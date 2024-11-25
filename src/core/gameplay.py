@@ -62,3 +62,24 @@ def play_level(level_index):
         pygame.display.flip()  
 
     return "menu"  
+
+def provide_hint(matrix, origin, drain, score_tracker):
+    """Provide a hint to the player by showing the next step in the shortest path."""
+    shortest_path = bfs_shortest_path(matrix, origin, drain)
+
+    if not shortest_path:
+        print("No valid path exists.")
+        return None  # No hint possible
+
+    # Deduct points for using the hint
+    score_tracker.deduct_hint_points()
+
+    # Return the next step in the shortest path (excluding the origin)
+    if len(shortest_path) > 1:
+        next_step = shortest_path[1]
+        print(f"Hint: The next step is {next_step}.")
+        return next_step
+    else:
+        print("You are already at the drain!")
+        return None
+        
