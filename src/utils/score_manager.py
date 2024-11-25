@@ -170,3 +170,16 @@ def validate_scores(scores):
         if not isinstance(scores.get(level_key), list):
             scores[level_key] = [] 
     return scores
+
+class GameScore:
+    def __init__(self):
+        self.score = 100  # Starting score
+
+    def deduct_hint_points(self):
+        """Deduct points for using a hint."""
+        deduction = 10  # Adjust as needed
+        self.score = max(0, self.score - deduction)
+        print(f"Hint used! {deduction} points deducted. Remaining score: {self.score}")
+
+
+
