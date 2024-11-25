@@ -159,3 +159,15 @@ def draw_faucet_and_drain(origin, drain, matrix):
 
     # Draw the drain image
     screen.blit(drain_image, (drain_x, drain_y))
+
+def show_hint(terrain, hint_cell):
+    """Highlight the hint cell on the grid."""
+    row, col = hint_cell
+    hint_color = (255, 215, 0)  # Gold for the hint cell
+
+    pygame.draw.rect(
+        terrain.surface,
+        hint_color,
+        pygame.Rect(col * cell_size, row * cell_size, cell_size, cell_size),
+    )
+    pygame.display.update()
