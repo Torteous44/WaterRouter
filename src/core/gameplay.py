@@ -6,6 +6,7 @@ from src.core.terrain import initialize_terrain, handle_click
 from src.core.simulation import run_simulation
 from src.utils.score_manager import GameScore, save_score
 from src.utils.end_of_level import end_of_level
+from src.core.simulation import bfs_shortest_path
 
 def play_level(level_index):
     """Play a specific level and return the final score."""
