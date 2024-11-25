@@ -37,6 +37,33 @@ def water_path_dfs(matrix: List[List[int]], origin: Tuple[int, int], drain: Tupl
 
     return []  
 
+def bfs_shortest_path(matrix, origin, drain):
+    """Find the shortest path from origin to drain using BFS."""
+    rows, cols = len(matrix), len(matrix[0])
+    directions = [(-1, 0), (1, 0), (0, -1), (0, 1)]
+    queue = deque([(origin, [])])  # Store current position and path
+    visited = set()
+
+    while queue:
+        (row, col), path = queue.popleft()
+
+        if (row, col) in visited:
+            continue
+
+        visited.add((row, col))
+        new_path = path + [(row, col)]
+
+        if (row, col) == drain:
+            return new_path
+
+        for dr, dc in directions:
+            new_row, new_col = row + dr, col + dc
+            if 0 <= new_row < rows and 0 <= new_col < cols:
+                if (new_row, new_col) not in visited and matrix[new_row][new_col] != -1:  # Skip obstacles
+                    queue.append(((new_row, new_col), new_path))
+
+    return []  
+
 def run_simulation(terrain, origin: Tuple[int, int], drain: Tuple[int, int], score_tracker) -> int:
     """Run the water path simulation and return path length if completed, else None."""
     matrix = get_matrix_snapshot(terrain)  # 2D list of heights
